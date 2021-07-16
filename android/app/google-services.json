@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "468329646583",
+    "project_id": "helpmate-ca76d",
+    "storage_bucket": "helpmate-ca76d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468329646583:android:45ac5bb41fa69572f446f2",
+        "android_client_info": {
+          "package_name": "com.example.help_mate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468329646583-qda8i7pdn4d0pi280u6fnkjg2sf20of0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS2P7mWsdLyM3JaiHRgmXcrHdpGD59R9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468329646583-qda8i7pdn4d0pi280u6fnkjg2sf20of0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
