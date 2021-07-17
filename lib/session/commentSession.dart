@@ -1,4 +1,4 @@
-import 'dart:html';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:help_mate/models/comment_model.dart';
@@ -8,7 +8,7 @@ class CommentSession {
   CollectionReference commentCollection =
       FirebaseFirestore.instance.collection("commentCollection");
 
-  Stream<List<Comment>> commentsStream(String postId) {
+  Stream<List> commentsStream(String postId) {
     Stream<QuerySnapshot> snapshot = commentCollection
         .where('postId', isEqualTo: postId)
         .limit(20)
@@ -16,7 +16,7 @@ class CommentSession {
 
 
     return snapshot.map((qSnap) => qSnap.docs
-        .map((doc) => Comment.fromJson(doc.data() as Map<Comment,dynamic>))
+        .map((doc) => Comment.fromJson(doc.data() as Map<String,dynamic>))
         .toList());
   }
 

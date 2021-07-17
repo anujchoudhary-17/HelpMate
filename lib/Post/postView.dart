@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:help_mate/Post/postViewController.dart';
 import 'package:help_mate/common/NavigationHelper.dart';
 import 'package:help_mate/session/postSession.dart';
+import 'package:help_mate/singleton.dart' as singleton;
 
 class PostView extends StatefulWidget {
   final String postId;
@@ -38,7 +39,7 @@ PostViewController _contoller = PostViewController();
 
 
   fetchPostData() async {
-    dynamic data = await _session.getPost(postId);
+    dynamic data = await _contoller.getPostData(postId);
 
     if (data == null) {
       print("Unable to get data");
@@ -69,7 +70,12 @@ PostViewController _contoller = PostViewController();
               elevation: 0,
               height: 50,
               onPressed: () {
-                NavigationHelper().navigateToRegister(context);
+
+                //---------Adding comments to the backend----------
+                List<String>  tags = ["tag1","tag2"];
+                List<String>  whoLiked = [];
+
+                _contoller.createNewComment(postId,singleton.currentUser!.uid ,commentController.text, DateTime.now().millisecondsSinceEpoch,0,tags,whoLiked);
               },
               color: Colors.red,
               child: Row(
@@ -118,7 +124,7 @@ PostViewController _contoller = PostViewController();
                           //  color: snapshot.data,
                           child: Container(
                             child: Text(
-                              document['postContent'],
+                              document['commentContent'],
                             ),
                           ),
                         ),
