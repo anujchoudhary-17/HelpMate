@@ -1,9 +1,9 @@
-class CommentData {
+class Comment {
   final String commentId, postId, userId, commentContent;
   final int timeStamp, likesOnComment;
   final List<String> tagIds, whoLiked;
 
-  CommentData.name(
+  Comment.name(
       {required this.commentId,
       required this.postId,
       required this.userId,
@@ -13,7 +13,7 @@ class CommentData {
       required this.tagIds,
       required this.whoLiked});
 
-  CommentData.fromJson(Map<String, dynamic> json)
+  Comment.fromJson(Map<String, dynamic> json)
       : commentId = json['commentId'],
         postId = json['postId'],
         userId = json['userId'],

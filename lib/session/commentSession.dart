@@ -1,22 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:help_mate/modelClasses/commentData.dart';
+import 'package:help_mate/models/comment_model.dart';
+import 'package:help_mate/models/models.dart';
 
 class CommentSession {
   CollectionReference commentCollection =
       FirebaseFirestore.instance.collection("commentCollection");
 
-  Stream<List<CommentData>> tagIdStram(String tagId) {
+  Stream<List<Comment>> tagIdStram(String tagId) {
     Stream<QuerySnapshot> snapshot = commentCollection
         .where('tagId', isEqualTo: tagId)
         .limit(20)
         .snapshots();
 
     return snapshot.map((qSnap) => qSnap.docs
-        .map((doc) => CommentData.fromJson(doc.data() as Map<String, dynamic>))
+        .map((doc) => Comment.fromJson(doc.data() as Map<String, dynamic>))
         .toList());
   }
 
-  Future<String> pushNewComment(CommentData commentData) async {
+  Future<String> pushNewComment(Comment commentData) async {
     Map<String, dynamic> commentItemData = commentData.toJson();
     DocumentReference doc = await commentCollection.add(commentItemData);
     await commentCollection
@@ -25,7 +26,7 @@ class CommentSession {
     return doc.id.toString();
   }
 
-  Future pushUpdateComment(CommentData commentData, String commentId) async {
+  Future pushUpdateComment(Comment commentData, String commentId) async {
     Map<String, dynamic> data = commentData.toJson();
     commentCollection.doc(commentId).update(data);
   }

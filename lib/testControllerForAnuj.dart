@@ -1,12 +1,12 @@
-import 'package:help_mate/modelClasses/tagData.dart';
+import 'package:help_mate/models/models.dart';
 import 'package:help_mate/session/tagSession.dart';
 
 class TestControllerForAnuj {
   TagSession tagSession = new TagSession();
 
   void writeTagData() {
-    TagData tagData =
-        new TagData(tagId: "0", tagName: "Matt_is_God", tagDescription: "OP");
+    Tag tagData =
+        new Tag(tagId: "0", tagName: "Matt_is_God", tagDescription: "OP");
     tagSession.pushNewTag(tagData);
   }
 
@@ -16,7 +16,7 @@ class TestControllerForAnuj {
   }
 
   Future? updateTagData() {
-    TagData tag = TagData(tagId: "1", tagName: "Random", tagDescription: "RD");
+    Tag tag = Tag(tagId: "1", tagName: "Random", tagDescription: "RD");
     tagSession.pushUpdateTag(tag, "0qnqZleV73ZMcNeDZ6fG");
   }
 }

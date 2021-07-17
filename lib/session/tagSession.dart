@@ -1,20 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:help_mate/modelClasses/tagData.dart';
+import 'package:help_mate/models/models.dart';
 
 class TagSession {
   CollectionReference tagCollection =
       FirebaseFirestore.instance.collection("tagCollection");
 
-  Stream<List<TagData>> tagIdStram(String tagId) {
+  Stream<List<Tag>> tagIdStram(String tagId) {
     Stream<QuerySnapshot> snapshot =
         tagCollection.where('tagId', isEqualTo: tagId).limit(20).snapshots();
 
     return snapshot.map((qSnap) => qSnap.docs
-        .map((doc) => TagData.fromJson(doc.data() as Map<String, dynamic>))
+        .map((doc) => Tag.fromJson(doc.data() as Map<String, dynamic>))
         .toList());
   }
 
-  Future<String> pushNewTag(TagData tagData) async {
+  Future<String> pushNewTag(Tag tagData) async {
     Map<String, dynamic> tagItemData = tagData.toJson();
     DocumentReference doc = await tagCollection.add(tagItemData);
     await tagCollection
@@ -23,7 +23,7 @@ class TagSession {
     return doc.id.toString();
   }
 
-  Future pushUpdateTag(TagData tagData, String tagId) async {
+  Future pushUpdateTag(Tag tagData, String tagId) async {
     Map<String, dynamic> data = tagData.toJson();
     tagCollection.doc(tagId).update(data);
   }

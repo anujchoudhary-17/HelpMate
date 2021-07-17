@@ -1,21 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:help_mate/modelClasses/commentData.dart';
-import 'package:help_mate/modelClasses/postData.dart';
+import 'package:help_mate/models/models.dart';
 
 class PostSession {
   CollectionReference postCollection =
       FirebaseFirestore.instance.collection("postCollection");
 
-  Stream<List<CommentData>> postIdStream(String postId) {
+  Stream<List<Comment>> postIdStream(String postId) {
     Stream<QuerySnapshot> snapshot =
         postCollection.where('postId', isEqualTo: postId).limit(20).snapshots();
 
     return snapshot.map((qSnap) => qSnap.docs
-        .map((doc) => CommentData.fromJson(doc.data() as Map<String, dynamic>))
+        .map((doc) => Comment.fromJson(doc.data() as Map<String, dynamic>))
         .toList());
   }
 
-  Future<String> pushNewPost(PostData postData) async {
+  Future<String> pushNewPost(Post postData) async {
     Map<String, dynamic> postItemData = postData.toJson();
     DocumentReference doc = await postCollection.add(postItemData);
     await postCollection
@@ -24,7 +23,7 @@ class PostSession {
     return doc.id.toString();
   }
 
-  Future pushUpdatePost(PostData postData, String postId) async {
+  Future pushUpdatePost(Post postData, String postId) async {
     Map<String, dynamic> data = postData.toJson();
     postCollection.doc(postId).update(data);
   }
