@@ -15,9 +15,7 @@ class DashboardView extends StatelessWidget {
               icon: Icon(Icons.question_answer))
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [],
-      ),
+
       body: ListView.builder(
           itemCount: comments.length,
           itemBuilder: (BuildContext buildContext, int index) {
