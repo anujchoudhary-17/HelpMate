@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:help_mate/Splash/splashView.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:help_mate/common/NavigationHelper.dart';
+import 'package:help_mate/Splash/splashView.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,13 +11,18 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
+final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+final GoogleSignIn googleSignIn = GoogleSignIn();
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-          primarySwatch: Colors.blue, scaffoldBackgroundColor: Colors.indigo),
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.blueGrey
+      ),
       home: Splash(),
     );
   }

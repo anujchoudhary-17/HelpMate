@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:help_mate/common/NavigationHelper.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class _SplashState extends State<Splash> {
               height: 50,
 
               onPressed: () {
-
+                NavigationHelper().navigateToRegister(context);
               },
               color: Colors.lightGreen,
 
