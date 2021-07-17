@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:help_mate/main.dart';
-import 'package:help_mate/singleton.dart';
+import 'package:help_mate/singleton.dart' as singleton;
+import 'package:help_mate/common/NavigationHelper.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -52,13 +53,12 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    final items = List<String>.generate(10000, (i) => "Item $i");
     return Scaffold(
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                  "Choose a method to sign in",
+                  "Choose a method to register",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 28)
               ),
@@ -96,6 +96,8 @@ class _RegisterState extends State<Register> {
 
                       final UserCredential authResult = await firebaseAuth.signInWithCredential(credential);
                       final User? user = authResult.user;
+                      singleton.currentUser = user;
+                      NavigationHelper().navigateToDashboard(context);
                     }
                   },
                   color: Colors.lightGreen,
@@ -104,7 +106,7 @@ class _RegisterState extends State<Register> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                            "Sign in with google",
+                            "Register with google",
                             style: TextStyle(color: Colors.white, fontSize: 20)
                         ),
                         Icon(Icons.arrow_forward_ios)
@@ -123,7 +125,9 @@ class _RegisterState extends State<Register> {
                     User? firebaseUser;
                     final userCredential = await firebaseAuth.createUserWithEmailAndPassword(email: nameController.text, password: passwordController.text);
                     firebaseUser = userCredential.user;
+                    singleton.currentUser = firebaseUser;
                     print(firebaseUser?.email);
+                    NavigationHelper().navigateToDashboard(context);
                   },
 
                   color: Colors.blue,
@@ -132,7 +136,7 @@ class _RegisterState extends State<Register> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                            "Sign in",
+                            "Register",
                             style: TextStyle(color: Colors.white, fontSize: 20)
                         ),
                         Icon(Icons.arrow_forward_ios)
@@ -148,7 +152,7 @@ class _RegisterState extends State<Register> {
                   elevation: 0,
                   height: 50,
                   onPressed: () {
-
+                    NavigationHelper().navigateToSplash(context);
                   },
                   color: Colors.red,
 

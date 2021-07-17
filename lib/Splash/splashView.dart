@@ -25,7 +25,6 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    final items = List<String>.generate(10000, (i) => "Item $i");
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +74,7 @@ class _SplashState extends State<Splash> {
             elevation: 0,
             height: 50,
             onPressed: () {
-
+              NavigationHelper().navigateToLogin(context);
             },
             color: Colors.lightGreen,
 
