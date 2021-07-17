@@ -12,7 +12,7 @@ class TestControllerForAnuj {
 
   Future getTagData() {
     return tagSession.getTag("0qnqZleV73ZMcNeDZ6fG");
-    ;
+
   }
 
   Future? updateTagData() {
