@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -5,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:help_mate/main.dart';
 import 'package:help_mate/singleton.dart' as singleton;
 import 'package:help_mate/common/NavigationHelper.dart';
+
+enum authProblems { UserNotFound, PasswordNotValid, NetworkError }
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -126,11 +129,16 @@ class _LoginState extends State<Login> {
                   height: 50,
                   onPressed: () async {
                     User? firebaseUser;
-                    final userCredential = await firebaseAuth.signInWithEmailAndPassword(email: nameController.text.trim(), password: passwordController.text.trim());
+                    final userCredential = await firebaseAuth
+                        .signInWithEmailAndPassword(
+                        email: nameController.text.trim(),
+                        password: passwordController.text.trim()
+                    );
                     firebaseUser = userCredential.user;
                     singleton.currentUser = firebaseUser;
                     print(firebaseUser?.email);
                     NavigationHelper().navigateToDashboard(context);
+
                   },
 
                   color: Colors.blue,

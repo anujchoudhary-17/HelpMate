@@ -186,7 +186,7 @@ NavigationHelper navigationHelper = NavigationHelper();
                   ]
               ),
 
-              SizedBox(height: 60),
+              SizedBox(height: 20),
 
               MaterialButton(
                   elevation: 0,
