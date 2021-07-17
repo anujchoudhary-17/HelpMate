@@ -16,7 +16,7 @@ class _DashboardState extends State<DashboardView> {
   //TagSession session = TagSession();
 
   List tagsList = [];
-
+NavigationHelper navigationHelper = NavigationHelper();
   @override
   void initState() {
     // TODO: implement initState
@@ -27,6 +27,57 @@ class _DashboardState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+
+
+
+
+
+
+
+
+        appBar: AppBar(),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('UserName'),
+              ),
+              ListTile(
+                title: Text('Test Anuj'),
+                onTap: () {
+                  navigationHelper.navigateToAnuj(context);
+                },
+              ),
+              ListTile(
+                title: Text('Post View'),
+                onTap: () {
+                  navigationHelper.navigateToPostView(context,"69tlrcCVvXWwubZdfpAq");
+                },
+              ),
+              ListTile(
+                title: Text('Post List View'),
+                onTap: () {
+                  navigationHelper.navigateToPostListView(context);
+                },
+              ),
+              ListTile(
+                title: Text('Create Post'),
+                onTap: () {
+                  navigationHelper.navigateToCreatePost(context);
+                },
+              ),
+            ],
+          ),
+        ),
+
+
+
+
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
