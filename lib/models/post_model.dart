@@ -1,22 +1,22 @@
 class Post {
-  String postId, postContent, whoPosted;
+  String? postId;
+  String postContent, whoPosted;
   int timeStamp;
   List<String> tagIds;
 
-  Post.name(this.postId, this.postContent, this.timeStamp, this.tagIds,
+  Post(this.postContent, this.timeStamp, this.tagIds,
       this.whoPosted);
 
-  fromJson(Map<String, dynamic> json) {
-    postId = json['postId'];
-    postContent = json['postContent'];
-    timeStamp = json['timeStamp'];
-    tagIds = json['tagIds'];
+  Post.fromJson(Map<String, dynamic> json) :
+    postId = json['postId'],
+    postContent = json['postContent'],
+    timeStamp = json['timeStamp'],
+    tagIds = json['tagIds'],
     whoPosted = json['whoPosted'];
-  }
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['postId'] = this.postId;
     data['postContent'] = this.postContent;
     data['timeStamp'] = this.timeStamp;
     data['tagIds'] = this.tagIds;

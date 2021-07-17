@@ -46,7 +46,7 @@ bool _isLoadingState=true;
   @override
   Widget build(BuildContext context) {
     return _isLoadingState ? Center(child: CupertinoActivityIndicator()) : Scaffold(
-      appBar: AppBar(title: Text("Hey"),),
+      appBar: AppBar(),
       drawer: Drawer(
         child: ListView(
         padding: EdgeInsets.zero,
@@ -66,13 +66,19 @@ bool _isLoadingState=true;
           ListTile(
             title: Text('Post View'),
             onTap: () {
-              navigationHelper.navigateToPostView(context);
+              navigationHelper.navigateToPostView(context,"69tlrcCVvXWwubZdfpAq");
             },
           ),
           ListTile(
-            title: Text('Post View'),
+            title: Text('Post List View'),
             onTap: () {
               navigationHelper.navigateToPostListView(context);
+            },
+          ),
+          ListTile(
+            title: Text('Create Post'),
+            onTap: () {
+              navigationHelper.navigateToCreatePost(context);
             },
           ),
         ],

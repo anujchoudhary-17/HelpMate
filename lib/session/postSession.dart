@@ -5,12 +5,14 @@ class PostSession {
   CollectionReference postCollection =
       FirebaseFirestore.instance.collection("postCollection");
 
-  Stream<List<Comment>> postIdStream(String postId) {
-    Stream<QuerySnapshot> snapshot =
-        postCollection.where('postId', isEqualTo: postId).limit(20).snapshots();
+  Stream<List> postsStream(String userId) {
+    Stream<QuerySnapshot> snapshot = postCollection
+        .where('whoPosted', isEqualTo: userId)
+        .limit(20)
+        .snapshots();
 
     return snapshot.map((qSnap) => qSnap.docs
-        .map((doc) => Comment.fromJson(doc.data() as Map<String, dynamic>))
+        .map((doc) => Post.fromJson(doc.data() as Map<String, dynamic>))
         .toList());
   }
 
@@ -29,14 +31,25 @@ class PostSession {
   }
 
   Future getPost(String postId) async {
-    postCollection.doc(postId).get().then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        print('Document data: ${documentSnapshot.data()}');
-        return documentSnapshot.data();
-      } else {
-        print('Document does not exist on the database');
-      }
-    });
+
+
+    List postList = [];
+
+    try {
+      await postCollection.where("postId",isEqualTo: postId).get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          postList.add(element.data());
+          print("Element Added" + element.data().toString());
+        });
+      });
+      return postList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+
+
+
   }
 
   Future getAllPosts(String whoPosted) async {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:help_mate/CreatePost/createPostView.dart';
 import 'package:help_mate/Post/postView.dart';
 import 'package:help_mate/testOnlyForAnuj.dart';
 import 'package:help_mate/Splash/splashView.dart';
@@ -45,10 +46,10 @@ class NavigationHelper{
     );
   }
 
-  void navigateToPostView(BuildContext context) {
+  void navigateToPostView(BuildContext context,String postId) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => PostView()),
+      MaterialPageRoute(builder: (context) => PostView(postId: postId,)),
     );
   }
 
@@ -56,6 +57,13 @@ class NavigationHelper{
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => DashboardView()),
+    );
+  }
+
+  void navigateToCreatePost(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CreatePostView()),
     );
   }
 
