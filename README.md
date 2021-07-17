@@ -1,16 +1,15 @@
-# help_mate
+# ShowCode-Hackathon
 
-A new Flutter project.
+Team HelpMate:
+| Team member     | Github Link |
+| ----------- | ----------- |
+| Matt            | [Click](https://github.com/Matt-CompSci)       |
+| DevOth          | [Click](https://github.com/othmanabdulsalam)        |
+| kg              | [Click](https://github.com/khush777)        |
+| fedecech        | [Click](https://github.com/fedecech)        |
+| Anuj Choudhary  | [Click](https://github.com/anujchoudhary-17)        |
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+A 48-hour hackathon, giving you the chance to help level-up society through gamification.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference
