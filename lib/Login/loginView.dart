@@ -26,7 +26,7 @@ class _LoginState extends State<Login> {
   }
 
   _buildTextField(
-      TextEditingController controller, IconData icon, String labelText) {
+      TextEditingController controller, IconData icon, String labelText, obscured) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
@@ -34,6 +34,9 @@ class _LoginState extends State<Login> {
       child: TextField(
         controller: controller,
         style: TextStyle(color: Colors.white),
+        enableSuggestions: false,
+        autocorrect: false,
+        obscureText: obscured,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: 10),
             labelText: labelText,
@@ -73,11 +76,11 @@ class _LoginState extends State<Login> {
 
               SizedBox(height: 30),
 
-              _buildTextField(nameController, Icons.account_circle, 'Email'),
+              _buildTextField(nameController, Icons.account_circle, 'Email', false),
 
               SizedBox(height: 20),
 
-              _buildTextField(passwordController, Icons.lock, "Password"),
+              _buildTextField(passwordController, Icons.lock, "Password", true),
 
               SizedBox(height: 30),
 
