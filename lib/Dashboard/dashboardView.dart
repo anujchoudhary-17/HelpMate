@@ -102,7 +102,7 @@ NavigationHelper navigationHelper = NavigationHelper();
               Column(
                   children: [
                     Text(
-                        "Liked percentage",
+                        "Ask : Answer ratio",
                         style: TextStyle(color: Colors.white, fontSize: 15)
                     ),
 
@@ -110,13 +110,14 @@ NavigationHelper navigationHelper = NavigationHelper();
 
                     CircularProgressIndicator(
                         value: 0.5,
-                        semanticsLabel: "Answer like percentage"
+                        backgroundColor: Colors.white,
+                        semanticsLabel: "Are you a giver or a taker?"
                     ),
 
                     SizedBox(height: 8),
 
                     Text(
-                        "50% of your answers have been liked",
+                        "Are you a giver or a taker?",
                         style: TextStyle(color: Colors.white, fontSize: 15)
                     ),
                   ]
@@ -134,14 +135,15 @@ NavigationHelper navigationHelper = NavigationHelper();
                   SizedBox(height: 10),
 
                   CircularProgressIndicator(
-                      value: 1,
+                      value: 0.75,
+                      backgroundColor: Colors.white,
                       semanticsLabel: "Answered percentage"
                   ),
 
                   SizedBox(height: 8),
 
                   Text(
-                      "100% of your questions have been answered!",
+                      "75% of your questions have been answered!",
                       style: TextStyle(color: Colors.white, fontSize: 15)
                   ),
                 ]
@@ -212,27 +214,58 @@ NavigationHelper navigationHelper = NavigationHelper();
 
               SizedBox(height: 20),
 
-              MaterialButton(
-                  elevation: 0,
-                  height: 50,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
 
-                  onPressed: () {
-                    NavigationHelper().navigateToRegister(context);
-                  },
-                  color: Colors.blueAccent,
+                children: [
+                  MaterialButton(
+                      elevation: 0,
+                      height: 50,
 
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                            "View Questions",
-                            style: TextStyle(color: Colors.white, fontSize: 20)
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-                      ]
-                  )
+                      onPressed: () {
+                        NavigationHelper().navigateToRegister(context);
+                      },
+                      color: Colors.blueAccent,
 
-              ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                                "My Questions",
+                                style: TextStyle(color: Colors.white, fontSize: 20)
+                            ),
+                            Icon(Icons.arrow_forward_ios)
+                          ]
+                      )
+
+                  ),
+
+                  SizedBox(width: 40),
+
+                  MaterialButton(
+                      elevation: 0,
+                      height: 50,
+
+                      onPressed: () {
+                        NavigationHelper().navigateToRegister(context);
+                      },
+                      color: Colors.blueAccent,
+
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                                "All Questions",
+                                style: TextStyle(color: Colors.white, fontSize: 20)
+                            ),
+                            Icon(Icons.arrow_forward_ios)
+                          ]
+                      )
+
+                  ),
+                ]
+              )
+
 
             ]
         )
