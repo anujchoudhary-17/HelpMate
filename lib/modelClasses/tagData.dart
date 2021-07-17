@@ -5,6 +5,7 @@ class TagData {
 
   TagData(this.tagName, this.tagDescription);
 
+
   TagData.fromJson(Map<String, dynamic> json) {
     tagId= json['tagId'];
     tagName= json['tagName'];

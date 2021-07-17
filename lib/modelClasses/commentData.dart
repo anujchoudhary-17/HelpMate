@@ -14,7 +14,7 @@ class CommentData {
       this.tagIds,
       this.whoLiked);
 
-  fromJson(Map<String, dynamic> json) {
+  CommentData.fromJson(Map<String, dynamic> json) {
     commentId= json['commentId'];
     postId= json['postId'];
     userId= json['userId'];
