@@ -1,7 +1,11 @@
 class User {
   String email, userId, name, country;
 
-  User.name(this.email, this.userId, this.name, this.country);
+  User(
+      {required this.email,
+      required this.userId,
+      required this.name,
+      required this.country});
 
   fromJson(Map<String, dynamic> json) {
     email = json['email'];
