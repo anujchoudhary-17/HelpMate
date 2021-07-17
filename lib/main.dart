@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:help_mate/common/NavigationHelper.dart';
+import 'package:help_mate/Splash/splashView.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,8 +16,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.indigo
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Splash(),
     );
   }
 }
