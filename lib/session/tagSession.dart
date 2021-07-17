@@ -37,17 +37,22 @@ class TagSession{
 
 
   Future getTag(String tagId) async {
-  tagCollection
-        .doc(tagId)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        print('Document data: ${documentSnapshot.data()}');
-        return documentSnapshot.data();
-      } else {
-        print('Document does not exist on the database');
-      }
-    });
+    List tagsList = [];
+
+    try {
+      await tagCollection.doc(tagId).get().then((
+          querySnapshot) {
+        if(querySnapshot.exists)
+          return querySnapshot.data();
+        else
+          return null;
+      });
+      return tagsList;
+    }
+    catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 
 
@@ -63,6 +68,7 @@ class TagSession{
           print("Element Added"+element.data().toString());
         });
       });
+
       return tagsList;
     }
     catch (e) {
