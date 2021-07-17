@@ -81,41 +81,41 @@ class _RegisterState extends State<Register> {
 
               SizedBox(height: 30),
 
-              MaterialButton(
-                  elevation: 0,
-                  height: 50,
-
-                  onPressed: () async{
-                    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-
-                    if(googleUser != null) {
-                      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
-                      final AuthCredential credential = GoogleAuthProvider.credential(
-                          idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
-
-                      final UserCredential authResult = await firebaseAuth.signInWithCredential(credential);
-                      final User? user = authResult.user;
-                      singleton.currentUser = user;
-                      NavigationHelper().navigateToDashboard(context);
-                    }
-                  },
-                  color: Colors.lightGreen,
-
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                            "Register with google",
-                            style: TextStyle(color: Colors.white, fontSize: 20)
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-                      ]
-                  )
-
-              ),
-
-              SizedBox(height: 30),
+              // MaterialButton(
+              //     elevation: 0,
+              //     height: 50,
+              //
+              //     onPressed: () async{
+              //       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+              //
+              //       if(googleUser != null) {
+              //         final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+              //
+              //         final AuthCredential credential = GoogleAuthProvider.credential(
+              //             idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+              //
+              //         final UserCredential authResult = await firebaseAuth.signInWithCredential(credential);
+              //         final User? user = authResult.user;
+              //         singleton.currentUser = user;
+              //         NavigationHelper().navigateToDashboard(context);
+              //       }
+              //     },
+              //     color: Colors.lightGreen,
+              //
+              //     child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: <Widget>[
+              //           Text(
+              //               "Register with google",
+              //               style: TextStyle(color: Colors.white, fontSize: 20)
+              //           ),
+              //           Icon(Icons.arrow_forward_ios)
+              //         ]
+              //     )
+              //
+              // ),
+              //
+              // SizedBox(height: 30),
 
 
               MaterialButton(
@@ -123,7 +123,7 @@ class _RegisterState extends State<Register> {
                   height: 50,
                   onPressed: () async {
                     User? firebaseUser;
-                    final userCredential = await firebaseAuth.createUserWithEmailAndPassword(email: nameController.text, password: passwordController.text);
+                    final userCredential = await firebaseAuth.createUserWithEmailAndPassword(email: nameController.text.trim(), password: passwordController.text.trim());
                     firebaseUser = userCredential.user;
                     singleton.currentUser = firebaseUser;
                     print(firebaseUser?.email);
