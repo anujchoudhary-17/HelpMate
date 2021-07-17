@@ -4,19 +4,16 @@ import 'package:help_mate/modelClasses/postData.dart';
 
 class PostSession {
   CollectionReference postCollection =
-  FirebaseFirestore.instance.collection("postCollection");
-
+      FirebaseFirestore.instance.collection("postCollection");
 
   Stream<List<CommentData>> postIdStream(String postId) {
-    Stream<QuerySnapshot> snapshot = postCollection
-        .where('postId', isEqualTo: postId)
-        .limit(20)
-        .snapshots();
+    Stream<QuerySnapshot> snapshot =
+        postCollection.where('postId', isEqualTo: postId).limit(20).snapshots();
 
-    return snapshot.map((qSnap) =>
-        qSnap.docs.map((doc) => CommentData.fromJson(doc.data())).toList());
+    return snapshot.map((qSnap) => qSnap.docs
+        .map((doc) => CommentData.fromJson(doc.data() as Map<String, dynamic>))
+        .toList());
   }
-
 
   Future<String> pushNewPost(PostData postData) async {
     Map<String, dynamic> postItemData = postData.toJson();
@@ -27,19 +24,13 @@ class PostSession {
     return doc.id.toString();
   }
 
-
-  Future pushUpdatePost(PostData postData, String postId) async
-  {
+  Future pushUpdatePost(PostData postData, String postId) async {
     Map<String, dynamic> data = postData.toJson();
     postCollection.doc(postId).update(data);
   }
 
-
   Future getPost(String postId) async {
-    postCollection
-        .doc(postId)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
+    postCollection.doc(postId).get().then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         print('Document data: ${documentSnapshot.data()}');
         return documentSnapshot.data();
@@ -49,26 +40,21 @@ class PostSession {
     });
   }
 
-
   Future getAllPosts(String whoPosted) async {
     List postsList = [];
 
-
     try {
-      await postCollection.where("whoPosted", isEqualTo: whoPosted).get().then((
-          querySnapshot) {
+      await postCollection
+          .where("whoPosted", isEqualTo: whoPosted)
+          .get()
+          .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
           postsList.add(element.data);
         });
       });
+    } catch (e) {
+      print(e.toString());
+      return null;
     }
-    catch (e) {
-    print(e.toString());
-    return null;
-    }
-
-
   }
-
-
 }
