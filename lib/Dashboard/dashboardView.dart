@@ -1,23 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:help_mate/data/mock_data.dart';
+import 'package:help_mate/models/models.dart';
 
-class DahboardView extends StatelessWidget {
-  const DahboardView({Key? key}) : super(key: key);
+class DashboardView extends StatelessWidget {
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 5,
-        itemBuilder: (BuildContext buildContext, int index) {
-          return _DashItem();
-        });
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () => print(''), icon: Icon(Icons.question_answer))
+        ],
+      ),
+      body: ListView.builder(
+          itemCount: comments.length,
+          itemBuilder: (BuildContext buildContext, int index) {
+            final comment = comments[index];
+
+            return _DashItem(
+              comment: comment,
+            );
+          }),
+    );
   }
 }
 
 class _DashItem extends StatelessWidget {
-  const _DashItem({Key? key}) : super(key: key);
+  final Comment comment;
+
+  const _DashItem({Key? key, required this.comment}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 5.0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      elevation: 1.0,
+      child: Container(
+        padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
+        color: Colors.white,
+        child: Row(
+          children: [Text(comment.commentContent)],
+        ),
+      ),
+    );
   }
 }
