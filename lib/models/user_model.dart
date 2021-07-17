@@ -1,9 +1,10 @@
 class User {
-  String email, userId, name, country;
+  String email, name, country;
+  String?  userId;
 
   User(
       {required this.email,
-      required this.userId,
+      this.userId,
       required this.name,
       required this.country});
 
@@ -16,8 +17,8 @@ class User {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['email'] = this.email;
     data['userId'] = this.userId;
+    data['email'] = this.email;
     data['name'] = this.name;
     data['country'] = this.country;
 

@@ -1,10 +1,10 @@
 class Tag {
-  final String tagName, tagDescription, tagId;
+  final String tagName, tagDescription;
+  final String?  tagId;
 
   Tag(
       {required this.tagName,
-      required this.tagDescription,
-      required this.tagId});
+      required this.tagDescription,  this.tagId});
 
   Tag.fromJson(Map<String, dynamic> json)
       : tagId = json['tagId'],
