@@ -11,8 +11,12 @@ class DashboardView extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-              onPressed: () => print(''), icon: Icon(Icons.question_answer))
+              onPressed: () => print('Ask question'),
+              icon: Icon(Icons.question_answer))
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [],
       ),
       body: ListView.builder(
           itemCount: comments.length,
