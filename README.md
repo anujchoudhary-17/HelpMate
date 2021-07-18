@@ -4,9 +4,6 @@ Team HelpMate:
 | Team member     | Github Link |
 | ----------- | ----------- |
 | Matt            | [Click](https://github.com/Matt-CompSci)       |
-| DevOth          | [Click](https://github.com/othmanabdulsalam)        |
-| kg              | [Click](https://github.com/khush777)        |
-| fedecech        | [Click](https://github.com/fedecech)        |
 | Anuj Choudhary  | [Click](https://github.com/anujchoudhary-17)        |
 
 
