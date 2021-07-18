@@ -72,6 +72,16 @@ class _PostViewState extends State<PostView> {
                         style: TextStyle(color: Colors.white, fontSize: 20)),
                     SizedBox(height: 20),
 
+                    SizedBox(height: 20),
+                    Text("Tags:",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+
+                    Text(postList[0]['tagIds'].join(", "),
+                      textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+
+                    SizedBox(height: 20),
                     _buildTextField(commentController, "Enter your Answer", false),
                     SizedBox(height: 20),
                     GestureDetector(
