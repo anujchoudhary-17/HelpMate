@@ -6,6 +6,8 @@ import 'package:help_mate/common/NavigationHelper.dart';
 import 'package:help_mate/session/postSession.dart';
 import 'package:help_mate/singleton.dart' as singleton;
 
+
+
 class PostView extends StatefulWidget {
   final String postId;
 
@@ -32,7 +34,6 @@ PostViewController _contoller = PostViewController();
     super.initState();
     fetchPostData();
   }
-
   _PostViewState({
     required this.postId,
   });
@@ -58,14 +59,40 @@ PostViewController _contoller = PostViewController();
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+            SizedBox(height: 20),
+
+          SizedBox(height: 30),
+          MaterialButton(
+              elevation: 0,
+              height: 50,
+              onPressed: () {
+
+              },
+              color: Colors.green,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.phone, color: Colors.white),
+                    SizedBox(width: 50),
+                    Text("Call",
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                  ]
+              )
+          ),
+
+          SizedBox(height: 40),
+          Text("Question:",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontSize: 32)),
+          SizedBox(height: 10),
           Text(postList[0]['postContent'],
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 20)),
-          SizedBox(height: 30),
+              style: TextStyle(color: Colors.white, fontSize: 14)),
 
-          SizedBox(height: 20),
+          SizedBox(height: 40),
           _buildTextField(
-              commentController, 'Comment', false),
+              commentController, 'Answer Question...', false),
+          SizedBox(height: 20),
           MaterialButton(
               elevation: 0,
               height: 50,
@@ -81,16 +108,19 @@ PostViewController _contoller = PostViewController();
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text("Submit",
+                    Text("Send Answer",
                         style: TextStyle(color: Colors.white, fontSize: 20)),
-                    Icon(Icons.arrow_forward_ios)
-                  ])),
+                    SizedBox(width: 30),
+                    Icon(Icons.message, color: Colors.white)
+                  ]
+              )
+          ),
           SizedBox(height: 30),
           Text("Answers:",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontSize: 16)),
           SizedBox(
-              height: MediaQuery.of(context).size.height - 300,
+              height: MediaQuery.of(context).size.height - 500,
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("commentCollection")
@@ -116,19 +146,36 @@ PostViewController _contoller = PostViewController();
                     children: snapshot.data!.docs.map((document) {
                       return Center(
                         child: Container(
-                          height: 220,
-                          width: 220,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
+                          height: 60,
+                          width: 400,
+
                           //  color: snapshot.data,
-                          child: Container(
-                            child: Text(
-                              document['commentContent'],
-                            ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 50,
+                                color: Colors.white,
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex: 4,
+                                        child: Text("EMAIL HERE"),
+
+                                      ),
+
+                                      Expanded(
+                                        flex: 6,
+                                        child: Text(document["commentContent"]),
+                                      ),
+                                    ]
+                                )
+                              ),
+                              //SizedBox(height: 5)
+                            ]
+                          )
                           ),
-                        ),
-                      );
+                        );
                     }).toList(),
                   );
                 },
@@ -141,7 +188,7 @@ PostViewController _contoller = PostViewController();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-          color: Colors.blue, border: Border.all(color: Colors.blue)),
+          color: Colors.blue, border: Border.all(color: Colors.white)),
       child: TextField(
         controller: controller,
         style: TextStyle(color: Colors.white),
