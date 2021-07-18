@@ -72,11 +72,12 @@ class _DashboardState extends State<DashboardView> {
                     style: TextStyle(fontSize: 16)),
               SizedBox(height: 20),
               Column(children: [
-                  Text("Ask : Answer ratio",
+                  Text("Question : Answer ratio",
                       style: TextStyle( fontSize: 15)),
                   SizedBox(height: 10),
                   CircularProgressIndicator(
-                      value: userCommentData.length.toDouble() /
+                      value: (userCommentData.length.toDouble() +
+                          userPostData.length.toDouble()) == 0 ? 0 : userCommentData.length.toDouble() /
                           (userCommentData.length.toDouble() +
                               userPostData.length.toDouble()),
                       backgroundColor: Colors.grey[300],
@@ -85,7 +86,7 @@ class _DashboardState extends State<DashboardView> {
                   Text("Are you a giver or a taker?",
                       style: TextStyle( fontSize: 15)),
               ]),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               Column(children: [
 
                   Text("Your Country",
