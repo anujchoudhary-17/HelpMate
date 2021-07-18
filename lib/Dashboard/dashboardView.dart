@@ -91,6 +91,12 @@ NavigationHelper navigationHelper = NavigationHelper();
                   navigationHelper.navigateToCreatePost(context);
                 },
               ),
+              ListTile(
+                title: Text('Leaderboard'),
+                onTap: () {
+                  navigationHelper.navigateToLeaderboard(context);
+                },
+              ),
             ],
           ),
         ),

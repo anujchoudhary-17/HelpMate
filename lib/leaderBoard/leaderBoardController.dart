@@ -1,4 +1,4 @@
-import 'package:help_mate/leaderBoard/leaderboardModel.dart';
+import 'package:help_mate/models/leaderboardModel.dart';
 import 'package:help_mate/session/commentSession.dart';
 import 'package:help_mate/session/userSession.dart';
 

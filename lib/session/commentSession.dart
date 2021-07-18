@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:help_mate/models/comment_model.dart';
 import 'package:help_mate/models/models.dart';
@@ -14,9 +12,8 @@ class CommentSession {
         .limit(20)
         .snapshots();
 
-
     return snapshot.map((qSnap) => qSnap.docs
-        .map((doc) => Comment.fromJson(doc.data() as Map<String,dynamic>))
+        .map((doc) => Comment.fromJson(doc.data() as Map<String, dynamic>))
         .toList());
   }
 
@@ -29,9 +26,30 @@ class CommentSession {
     return doc.id.toString();
   }
 
-  Future pushUpdateComment(Comment commentData, String commentId) async {
-    Map<String, dynamic> data = commentData.toJson();
-    commentCollection.doc(commentId).update(data);
+  Future updateCommentState(String commentId,List whoLiked ) async {
+
+    commentCollection.doc(commentId).update({'whoLiked':whoLiked});
+  }
+
+  Future isUserLikedComment(String commentId, String userId) async {
+    List postsList = [];
+
+    try {
+      await commentCollection
+          .where("commentId", isEqualTo: commentId)
+          .where("whoLiked", arrayContains: userId)
+          .get()
+          .then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          print("Element Added" + element.data().toString());
+          postsList.add(element.data);
+        });
+      });
+      return postsList.length==0 ? false : true;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
   }
 
   Future getComment(String commentId) async {
@@ -47,8 +65,6 @@ class CommentSession {
       }
     });
   }
-
-
 
   Future getAllComments(String userId) async {
     List postsList = [];
@@ -71,13 +87,14 @@ class CommentSession {
     }
   }
 
-
   Future stupid(String userId) async {
     List postsList = [];
 
     try {
       await commentCollection
-          .where('userId',)
+          .where(
+            'userId',
+          )
           .get()
           .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
@@ -92,10 +109,4 @@ class CommentSession {
       return null;
     }
   }
-
-
-
-
-
-
 }

@@ -22,6 +22,7 @@ class _PostViewState extends State<PostView> {
   final TextEditingController commentController = TextEditingController();
   List postList=[];
 
+
 PostViewController _contoller = PostViewController();
   String postId;
 
@@ -122,12 +123,14 @@ PostViewController _contoller = PostViewController();
           SizedBox(
               height: MediaQuery.of(context).size.height - 500,
               child: StreamBuilder(
+
                 stream: FirebaseFirestore.instance
                     .collection("commentCollection")
                     .where("postId", isEqualTo: postId)
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
+
                   if (!snapshot.hasData) {
                     return Container(
                       child: Center(
@@ -143,6 +146,7 @@ PostViewController _contoller = PostViewController();
                   }
 
                   return ListView(
+
                     children: snapshot.data!.docs.map((document) {
                       return Center(
                         child: Container(
@@ -163,10 +167,24 @@ PostViewController _contoller = PostViewController();
                                         child: Text("EMAIL HERE"),
 
                                       ),
-
                                       Expanded(
                                         flex: 6,
                                         child: Text(document["commentContent"]),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: GestureDetector(
+                                          onTap: (){
+                                            bool isCommentLiked=document['whoLiked'].contains(singleton.currentUser!.uid);
+                                          _contoller.changeCommentState(document['commentId'], singleton.currentUser!.uid,isCommentLiked,document['whoLiked']);
+                                          _contoller.changeLeaderboardState(document['userId'],isCommentLiked);
+                                          },
+                                          child: Icon(
+                                            Icons.thumb_up_alt,
+                                            color: document['whoLiked'].contains(singleton.currentUser!.uid) ? Colors.blue : Colors.grey,
+                                            size: 36.0,
+                                          ),
+                                        ),
                                       ),
                                     ]
                                 )

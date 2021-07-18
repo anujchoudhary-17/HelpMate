@@ -81,6 +81,7 @@ class _RegisterState extends State<Register> {
                     firebaseUser = userCredential.user;
                     singleton.currentUser = firebaseUser;
                     _controller.writeUserData(countryController.text.trim(), emailController.text.trim(), nameController.text, singleton.currentUser!.uid);
+                    _controller.writeUserDataOnLeaderboard(countryController.text.trim(), 0, nameController.text, singleton.currentUser!.uid);
                     print(firebaseUser?.email);
                     NavigationHelper().navigateToDashboard(context);
                   },
