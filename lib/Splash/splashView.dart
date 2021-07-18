@@ -29,10 +29,16 @@ class _SplashState extends State<Splash> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Image(
+            image: AssetImage("images/logo.png")
+          ),
+
+          SizedBox(height: 40),
+
           Text(
             "Welcome to HelpMate",
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white, fontSize: 28)
+            style: TextStyle(color: Colors.black, fontSize: 28)
           ),
 
           SizedBox(height: 30),
@@ -40,56 +46,63 @@ class _SplashState extends State<Splash> {
           Text(
               "And one-stop application for you to get your questions answered!",
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 16)
+              style: TextStyle(color: Colors.black, fontSize: 16)
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: 50),
 
-          MaterialButton(
-              elevation: 0,
-              height: 50,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MaterialButton(
+                  elevation: 0,
+                  height: 50,
 
-              onPressed: () {
-                NavigationHelper().navigateToRegister(context);
-              },
-              color: Colors.lightGreen,
+                  onPressed: () {
+                    NavigationHelper().navigateToRegister(context);
+                  },
+                  color: Colors.lightBlueAccent,
 
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                        "Register",
-                        style: TextStyle(color: Colors.white, fontSize: 20)
-                    ),
-                    Icon(Icons.arrow_forward_ios)
-                  ]
-              )
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                            "Register",
+                            style: TextStyle(color: Colors.black, fontSize: 20)
+                        ),
+                        Icon(Icons.arrow_forward_ios)
+                      ]
+                  )
 
-          ),
+              ),
 
-          SizedBox(height: 30),
+              SizedBox(width: 30),
 
 
-          MaterialButton(
-            elevation: 0,
-            height: 50,
-            onPressed: () {
-              NavigationHelper().navigateToLogin(context);
-            },
-            color: Colors.lightGreen,
+              MaterialButton(
+                  elevation: 0,
+                  height: 50,
+                  onPressed: () {
+                    NavigationHelper().navigateToLogin(context);
+                  },
+                  color: Colors.lightBlueAccent,
 
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "Sign in",
-                  style: TextStyle(color: Colors.white, fontSize: 20)
-                ),
-                Icon(Icons.arrow_forward_ios)
-              ]
-            )
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                            "Sign in",
+                            style: TextStyle(color: Colors.black, fontSize: 20)
+                        ),
+                        Icon(Icons.arrow_forward_ios)
+                      ]
+                  )
 
-          ),
+              ),
+            ]
+          )
+
+
 
         ]
       )
