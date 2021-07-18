@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">468329646583-qda8i7pdn4d0pi280u6fnkjg2sf20of0.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">468329646583</string>
+    <string name="google_api_key" translatable="false">AIzaSyDS2P7mWsdLyM3JaiHRgmXcrHdpGD59R9U</string>
+    <string name="google_app_id" translatable="false">1:468329646583:android:45ac5bb41fa69572f446f2</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDS2P7mWsdLyM3JaiHRgmXcrHdpGD59R9U</string>
+    <string name="google_storage_bucket" translatable="false">helpmate-ca76d.appspot.com</string>
+    <string name="project_id" translatable="false">helpmate-ca76d</string>
+</resources>

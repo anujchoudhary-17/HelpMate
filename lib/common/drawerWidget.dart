@@ -46,6 +46,12 @@ Widget DrawerWidget(BuildContext context)
           },
         ),
         ListTile(
+          title: Text('Video Call',style: TextStyle(fontSize: 20),),
+          onTap: () {
+            navigationHelper.navigateToVideoCall(context);
+          },
+        ),
+        ListTile(
           title: Text('LogOut',style: TextStyle(fontSize: 20),),
           onTap: () {
             navigationHelper.navigateToRegister(context);

@@ -10,6 +10,7 @@ import 'package:help_mate/Register/registerView.dart';
 import 'package:help_mate/Login/loginView.dart';
 import 'package:help_mate/PostList/postListView.dart';
 import 'package:help_mate/Dashboard/dashboardView.dart';
+import 'package:help_mate/videoCall/pages/index.dart';
 
 class NavigationHelper{
   void navigateToAnuj(BuildContext context)
@@ -85,5 +86,15 @@ class NavigationHelper{
       MaterialPageRoute(builder: (context) => LeaderboardView()),
     );
   }
+
+  void navigateToVideoCall(BuildContext context)
+  {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => IndexPage()),
+    );
+  }
+
+
 
 }
