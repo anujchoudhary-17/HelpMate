@@ -23,7 +23,7 @@ class _PostListViewState extends State<PostListView> {
       body: Container(child: Column(
         children: [
           SizedBox(
-              height: MediaQuery.of(context).size.height - 300,
+              height: MediaQuery.of(context).size.height,
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("postCollection")
@@ -52,31 +52,47 @@ class _PostListViewState extends State<PostListView> {
                           NavigationHelper().navigateToPostView(context, document['postId']);
                         },
                         child: Center(
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                            //  color: snapshot.data,
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.025),
-                                  child: Text(
-                                    document['postContent'],style: TextStyle(fontSize: 15),
+                          child: Column(
+                            children: [
+                              Container(
+                                  height: MediaQuery.of(context).size.height * 0.125,
+                                  width: MediaQuery.of(context).size.width * 0.9,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
                                   ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.025),
-                                  child: Text(
-                                    (f.format(new DateTime.fromMillisecondsSinceEpoch(document['timeStamp']))),style: TextStyle(fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ),
+                                  //  color: snapshot.data,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.025),
+                                        child: Text(
+                                          // Max amount of 50 characters
+                                          document['postContent'].substring(0, (50 < document['postContent'].length ? 50 : document['postContent'].length)) + "?",style: TextStyle(fontSize: 15),
+                                        ),
+                                      ),
+
+                                      Container(
+                                          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.025),
+                                          child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Icon(Icons.question_answer, color: Colors.blue),
+                                                SizedBox(width: 50),
+                                                Text(
+                                                  (f.format(new DateTime.fromMillisecondsSinceEpoch(document['timeStamp']))),style: TextStyle(fontSize: 15),
+                                                ),
+                                              ]
+                                          )
+                                      ),
+                                    ],
+                                  )
+                              ),
+
+                              SizedBox(height: 20)
+                            ]
+                          )
+
                         ),
                       );
                     }).toList(),
