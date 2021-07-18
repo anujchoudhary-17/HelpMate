@@ -15,6 +15,7 @@ class CreatePostView extends StatefulWidget {
 class _CreatePostViewState extends State<CreatePostView> {
 
   TextEditingController postContentController =TextEditingController();
+  TextEditingController tagsContentController  =TextEditingController();
   CreatePostController _controller = CreatePostController();
 
   @override
@@ -23,14 +24,21 @@ class _CreatePostViewState extends State<CreatePostView> {
       drawer: DrawerWidget(context),
       appBar: AppBar(),
       body: Container(
+        color:Colors.blue[300],
         child: Column(
           children: [
             _buildTextField(postContentController,"Type your question",false),
+            _buildTextField(tagsContentController,"Tags here separated with ,",false),
             GestureDetector(
               onTap: (){
-                List<String>  tags = ["tag1","tag2"];
-                _controller.createNewPost(postContentController.text, DateTime.now().millisecondsSinceEpoch,tags, singleton.currentUser!.uid);
-                NavigationHelper().navigateToDashboard(context);
+              if(postContentController.text.length!=0)
+                {
+                  List<String>  tags = tagsContentController.text.split(",");
+                  _controller.createNewPost(postContentController.text, DateTime.now().millisecondsSinceEpoch,tags, singleton.currentUser!.uid);
+                  postContentController.text="";
+                  tagsContentController.text="";
+                  NavigationHelper().navigateToPostListView(context);
+                }
               },
               child: Container(
                   child: Row(

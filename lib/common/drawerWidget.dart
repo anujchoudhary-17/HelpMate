@@ -22,6 +22,12 @@ Widget DrawerWidget(BuildContext context)
           child: Text("HelpMate",style: TextStyle(color: Colors.white,fontSize: 30),),
         ),
         ListTile(
+          title: Text('Dashboard',style: TextStyle(fontSize: 20),),
+          onTap: () {
+            navigationHelper.navigateToDashboard(context);
+          },
+        ),
+        ListTile(
           title: Text('Post List View',style: TextStyle(fontSize: 20),),
           onTap: () {
             navigationHelper.navigateToPostListView(context);

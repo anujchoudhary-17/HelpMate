@@ -56,9 +56,10 @@ class PostViewController{
       String commentContent,
       int timeStamp,
       int likesOnComment,
-      List<String> tagIds,
-      List<String> whoLiked) {
-    Comment commentData = Comment(postId,userId,commentContent,timeStamp,likesOnComment,tagIds,whoLiked);
+      List<dynamic> tagIds,
+      List<String> whoLiked,
+      String? whoCommentedEmail) {
+    Comment commentData = Comment(postId,userId,commentContent,timeStamp,likesOnComment,tagIds,whoLiked,whoCommentedEmail);
     _commentSession.pushNewComment(commentData);
   }
 

@@ -25,6 +25,7 @@ class _PostListViewState extends State<PostListView> {
 
       drawer: DrawerWidget(context),
       body: Container(
+        color:Colors.lightBlue[200],
           padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*0.05,),
 
           child: Column(

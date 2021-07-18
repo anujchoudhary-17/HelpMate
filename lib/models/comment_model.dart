@@ -1,8 +1,9 @@
 class Comment {
    String  postId, userId, commentContent;
-   String? commentId;
+   String? commentId,whoCommentedEmail;
    int timeStamp, likesOnComment;
-   List<String> tagIds, whoLiked;
+   List<dynamic> tagIds;
+       List<String> whoLiked;
 
   Comment(this.postId,
        this.userId,
@@ -10,7 +11,7 @@ class Comment {
        this.timeStamp,
        this.likesOnComment,
        this.tagIds,
-       this.whoLiked);
+       this.whoLiked,this.whoCommentedEmail);
 
   Comment.fromJson(Map<String, dynamic> json)
       : commentId = json['commentId'],
@@ -20,7 +21,8 @@ class Comment {
         timeStamp = json['timeStamp'],
         likesOnComment = json['likesOnComment'],
         tagIds = json['tagIds'],
-        whoLiked = json['whoLiked'];
+        whoLiked = json['whoLiked'],
+        whoCommentedEmail = json['whoCommentedEmail'];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -31,6 +33,7 @@ class Comment {
     data['likesOnComment'] = this.likesOnComment;
     data['tagIds'] = this.tagIds;
     data['whoLiked'] = this.whoLiked;
+    data['whoCommentedEmail'] = this.whoCommentedEmail;
 
     return data;
   }

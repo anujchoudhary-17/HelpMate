@@ -5,6 +5,7 @@ import 'package:help_mate/Post/postViewController.dart';
 import 'package:help_mate/common/NavigationHelper.dart';
 import 'package:help_mate/common/drawerWidget.dart';
 import 'package:help_mate/session/postSession.dart';
+import 'package:help_mate/session/userSession.dart';
 import 'package:help_mate/singleton.dart' as singleton;
 
 class PostView extends StatefulWidget {
@@ -24,7 +25,7 @@ class _PostViewState extends State<PostView> {
   String postId;
 
   bool _isLoadingState = true;
-  PostSession _session = PostSession();
+  UserSession _userSession = UserSession();
 
   @override
   void initState() {
@@ -80,7 +81,7 @@ class _PostViewState extends State<PostView> {
                       if(commentController.text.toString().length!=0)
                         {
 
-                          List<String> tags = ["tag1", "tag2"];
+                          List<dynamic> tags = postList[0]['tagIds'];
                           List<String> whoLiked = [];
 
 
@@ -91,7 +92,7 @@ class _PostViewState extends State<PostView> {
                               DateTime.now().millisecondsSinceEpoch,
                               0,
                               tags,
-                              whoLiked);
+                              whoLiked,singleton.currentUser!.email);
                           commentController.text="";
                         }
                       },
@@ -168,13 +169,13 @@ class _PostViewState extends State<PostView> {
                                                 MainAxisAlignment.center,
                                             children: <Widget>[
                                               Expanded(
-                                                flex: 4,
-                                                child: Text("EMAIL HERE"),
+                                                flex: 5,
+                                                child: Text(document["whoCommentedEmail"],style: TextStyle(fontSize: 10),),
                                               ),
                                               Expanded(
-                                                flex: 6,
+                                                flex: 8,
                                                 child: Text(
-                                                    document["commentContent"]),
+                                                    document["commentContent"],textAlign: TextAlign.center,),
                                               ),
                                               Expanded(
                                                 flex: 2,

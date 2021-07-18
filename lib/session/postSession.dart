@@ -72,4 +72,28 @@ class PostSession {
       return null;
     }
   }
+  
+  
+  Future getAllHelpMatePosts() async{
+
+    List postList = [];
+
+    try {
+      await postCollection.get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          postList.add(element.data());
+         
+        });
+      });
+      return postList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+
+
+
+  }
+  
+  
 }
