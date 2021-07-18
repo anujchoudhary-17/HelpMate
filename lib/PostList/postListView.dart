@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:help_mate/common/NavigationHelper.dart';
+import 'package:help_mate/common/drawerWidget.dart';
 import 'package:help_mate/session/postSession.dart';
 import 'package:help_mate/singleton.dart' as singleton;
 import 'package:intl/intl.dart';
@@ -20,10 +21,15 @@ class _PostListViewState extends State<PostListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(child: Column(
+      appBar: AppBar(),
+
+      drawer: DrawerWidget(context),
+      body: Container(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*0.05,),
+
+          child: Column(
         children: [
-          SizedBox(
-              height: MediaQuery.of(context).size.height,
+          Expanded(
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("postCollection")
