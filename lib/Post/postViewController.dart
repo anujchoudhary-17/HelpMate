@@ -1,10 +1,15 @@
 import 'package:help_mate/models/comment_model.dart';
 import 'package:help_mate/session/commentSession.dart';
 import 'package:help_mate/session/postSession.dart';
+import 'package:help_mate/session/userSession.dart';
+
 
 class PostViewController{
 
-
+  UserSession userSession = new UserSession();
+  Future getUserData(String userId) {
+    return userSession.getUser(userId);
+  }
 
   PostSession _session= PostSession();
 
