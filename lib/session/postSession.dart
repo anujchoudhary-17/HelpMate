@@ -61,9 +61,12 @@ class PostSession {
           .get()
           .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
+          print("Element Added" + element.data().toString());
+
           postsList.add(element.data);
         });
       });
+      return postsList;
     } catch (e) {
       print(e.toString());
       return null;

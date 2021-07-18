@@ -47,4 +47,55 @@ class CommentSession {
       }
     });
   }
+
+
+
+  Future getAllComments(String userId) async {
+    List postsList = [];
+
+    try {
+      await commentCollection
+          .where("userId", isEqualTo: userId)
+          .get()
+          .then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          print("Element Added" + element.data().toString());
+
+          postsList.add(element.data);
+        });
+      });
+      return postsList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+
+  Future stupid(String userId) async {
+    List postsList = [];
+
+    try {
+      await commentCollection
+          .where('userId',)
+          .get()
+          .then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          print("Element Added" + element.data().toString());
+
+          postsList.add(element.data);
+        });
+      });
+      return postsList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+
+
+
+
+
 }

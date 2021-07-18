@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:help_mate/CreatePost/createPostView.dart';
 import 'package:help_mate/Post/postView.dart';
+import 'package:help_mate/allQuestions/allQuestionsView.dart';
 import 'package:help_mate/testOnlyForAnuj.dart';
 import 'package:help_mate/Splash/splashView.dart';
 import 'package:help_mate/Register/registerView.dart';
@@ -64,6 +65,14 @@ class NavigationHelper{
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => CreatePostView()),
+    );
+  }
+
+
+  void navigateToAllQuestions(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AllQuestionsView()),
     );
   }
 

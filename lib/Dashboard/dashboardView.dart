@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:help_mate/Dashboard/dashboardController.dart';
 import 'package:help_mate/common/NavigationHelper.dart';
 import 'package:help_mate/singleton.dart' as singleton;
 
@@ -11,29 +12,48 @@ class DashboardView extends StatefulWidget {
 }
 
 class _DashboardState extends State<DashboardView> {
-  //TestControllerForAnuj controller = TestControllerForAnuj();
 
-  //TagSession session = TagSession();
 
-  List tagsList = [];
+  DashboardController _controller = DashboardController();
+
+  bool _isLoadingState=true;
+
+  List userData = [];
+  List userPostData = [];
+  List userCommentData = [];
+  String userId=singleton.currentUser!.uid;
+
 NavigationHelper navigationHelper = NavigationHelper();
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
+    fetchAllData();
   }
+
+
+
+  fetchAllData() async {
+    dynamic ud = await _controller.getUserData(userId);
+    dynamic upd=await _controller.getUserPostData(userId);
+    dynamic ucd = await _controller.getUserCommentData(userId);
+
+    if (ud == null || upd == null || ucd == null) {
+      print("Unable to get data");
+    } else {
+      setState(() {
+        userData = ud;
+        userPostData=upd;
+        userCommentData = ucd;
+
+        _isLoadingState=false;
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-
-
-
-
-
-
+    return _isLoadingState ? Scaffold(body: Center(child: CupertinoActivityIndicator())) : Scaffold(
 
 
         appBar: AppBar(),
@@ -45,7 +65,7 @@ NavigationHelper navigationHelper = NavigationHelper();
                 decoration: BoxDecoration(
                   color: Colors.blue,
                 ),
-                child: Text('UserName'),
+                child: Text(userData[0]['name']),
               ),
               ListTile(
                 title: Text('Test Anuj'),
@@ -82,9 +102,9 @@ NavigationHelper navigationHelper = NavigationHelper();
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                  "Welcome ${singleton.currentUser?.email}",
+                  "Welcome ${userData[0]['name']}",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 28)
+                  style: TextStyle(color: Colors.white, fontSize: 28,fontWeight: FontWeight.bold)
               ),
 
               SizedBox(height: 30),
@@ -109,7 +129,7 @@ NavigationHelper navigationHelper = NavigationHelper();
                     SizedBox(height: 10),
 
                     CircularProgressIndicator(
-                        value: 0.5,
+                        value: userCommentData.length.toDouble()/(userCommentData.length.toDouble()+userPostData.length.toDouble()),
                         backgroundColor: Colors.white,
                         semanticsLabel: "Are you a giver or a taker?"
                     ),
@@ -128,23 +148,16 @@ NavigationHelper navigationHelper = NavigationHelper();
               Column(
                 children: [
                   Text(
-                      "Answered percentage",
-                      style: TextStyle(color: Colors.white, fontSize: 15)
+                      "Your Country",
+                      style: TextStyle(color: Colors.white, fontSize: 18,fontWeight: FontWeight.bold)
                   ),
 
-                  SizedBox(height: 10),
-
-                  CircularProgressIndicator(
-                      value: 0.75,
-                      backgroundColor: Colors.white,
-                      semanticsLabel: "Answered percentage"
-                  ),
 
                   SizedBox(height: 8),
 
                   Text(
-                      "75% of your questions have been answered!",
-                      style: TextStyle(color: Colors.white, fontSize: 15)
+                      "${userData[0]['country']}",
+                      style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold)
                   ),
                 ]
               ),
@@ -158,12 +171,12 @@ NavigationHelper navigationHelper = NavigationHelper();
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                            "5000",
+                            "${userPostData.length}",
                             style: TextStyle(color: Colors.white, fontSize: 32)
                         ),
 
                         Text(
-                            "questions asked",
+                            "Questions asked",
                             style: TextStyle(color: Colors.white, fontSize: 15)
                         ),
                       ]
@@ -175,12 +188,12 @@ NavigationHelper navigationHelper = NavigationHelper();
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                              "4",
+                              "${userCommentData.length}",
                               style: TextStyle(color: Colors.white, fontSize: 32)
                           ),
 
                           Text(
-                              "questions answered",
+                              "Questions answered",
                               style: TextStyle(color: Colors.white, fontSize: 15)
                           ),
                         ]
@@ -195,7 +208,7 @@ NavigationHelper navigationHelper = NavigationHelper();
                   height: 50,
 
                   onPressed: () {
-                    NavigationHelper().navigateToRegister(context);
+                    NavigationHelper().navigateToCreatePost(context);
                   },
                   color: Colors.lightGreen,
 
@@ -223,7 +236,7 @@ NavigationHelper navigationHelper = NavigationHelper();
                       height: 50,
 
                       onPressed: () {
-                        NavigationHelper().navigateToRegister(context);
+                        navigationHelper.navigateToPostListView(context);
                       },
                       color: Colors.blueAccent,
 
@@ -247,7 +260,7 @@ NavigationHelper navigationHelper = NavigationHelper();
                       height: 50,
 
                       onPressed: () {
-                        NavigationHelper().navigateToRegister(context);
+                        NavigationHelper().navigateToAllQuestions(context);
                       },
                       color: Colors.blueAccent,
 

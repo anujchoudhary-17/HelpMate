@@ -15,16 +15,35 @@ class UserSession {
 
   Future getUser(String userId) async {
 
-    List tagsList = [];
+    List userData = [];
 
     try {
       await userCollection.where("userId",isEqualTo: userId).get().then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
-          tagsList.add(element.data());
+          userData.add(element.data());
           print("Element Added" + element.data().toString());
         });
       });
-      return tagsList;
+      return userData;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+
+  Future getAllUsers() async {
+
+    List userData = [];
+
+    try {
+      await userCollection.get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          userData.add(element.data());
+          print("Element Added" + element.data().toString());
+        });
+      });
+      return userData;
     } catch (e) {
       print(e.toString());
       return null;
